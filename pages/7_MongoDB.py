@@ -20,9 +20,29 @@ st.markdown("Si no tienes la conexión real, escribe tu código usando `st.code(
 
 # ESTUDIANTE: Escribe tu código (o tu st.code teórico) a continuación
 
-cliente = MongoClient("mongodb+srv://santivelgu201109_db_user:1234@cluster0.8wudie4.mongodb.net/")
+uri = f"mongodb+srv://santivelgu201109_db_user:1234@cluster0.8wudie4.mongodb.net/"
+try:
+    # 1️⃣ Conectar al cluster
+    client = MongoClient(uri)
 
-data = cliente["Veterinaria"]
-collection = data["mascotas"]
-df_mongo = pd.DataFrame(list(collection.find()))
-st.dataframe(df_mongo)
+    # 2️⃣ Seleccionar base de datos
+    db = client["Veterinaria"]
+
+    # 3️⃣ Seleccionar colección
+    coleccion = db["mascotas"]
+
+    # 4️⃣ Obtener documentos
+    documentos = list(coleccion.find())
+
+    # 5️⃣ Convertir a DataFrame
+    df_mongo = pd.DataFrame(documentos)
+
+    # 6️⃣ Eliminar columna _id si existe
+    if "_id" in df_mongo.columns:
+        df_mongo.drop(columns=["_id"], inplace=True)
+
+    st.success("Conexión exitosa a MongoDB Atlas 🚀")
+    st.dataframe(df_mongo)
+
+except Exception as e:
+    st.error(f"Error al conectar con MongoDB: {e}")
