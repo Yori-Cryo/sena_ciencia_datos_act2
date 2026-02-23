@@ -19,6 +19,15 @@ A veces los datos están "vivos" y debes consultarlos a través de una API en in
 st.subheader("Tu resultado:")
 # ESTUDIANTE: Escribe tu código a continuación
 # Recuerda usar la librería requests que ya está importada arriba
+try:
+    response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=10")
+    if response.status_code == 200:
+        data = response.json()
+        df_pokemon = pd.DataFrame(data["results"])
 
+    else:
+        st.error(f"Error al obtener los datos: {response.status_code}")
+except Exception as e:
+    st.error(f"Ocurrió un error al obtener los datos: {e}")
 
-# st.dataframe(...)
+st.dataframe(df_pokemon)

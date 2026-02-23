@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import openpyxl 
 
 st.title("Carga de datos: Archivos de Excel")
 
@@ -17,6 +18,12 @@ st.info("💡 Nota: Asegúrate de tener el archivo Excel en la misma ruta antes 
 
 st.subheader("Tu resultado:")
 # ESTUDIANTE: Escribe tu código a continuación
+try:
+    df_excel = pd.read_excel("reporte_financiero.xlsx", engine="openpyxl")
 
+except FileNotFoundError:
+    st.error("El archivo 'reporte_financiero.xlsx' no existe en la carpeta del proyecto.")
+except Exception as e:
+    st.error(f"Ocurrió un error al leer el archivo: {e}")
 
-# st.dataframe(...)
+st.dataframe(df_excel)

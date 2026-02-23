@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pymongo import MongoClient
 
 st.title("Bases de Datos en la Nube: MongoDB")
 
@@ -19,5 +20,9 @@ st.markdown("Si no tienes la conexión real, escribe tu código usando `st.code(
 
 # ESTUDIANTE: Escribe tu código (o tu st.code teórico) a continuación
 
+cliente = MongoClient("mongodb+srv://santivelgu201109_db_user:1234@cluster0.8wudie4.mongodb.net/")
 
-
+data = cliente["Veterinaria"]
+collection = data["mascotas"]
+df_mongo = pd.DataFrame(list(collection.find()))
+st.dataframe(df_mongo)

@@ -1,0 +1,17 @@
+[
+    {
+        "Titulo": "The Legend of Zelda: Breath of the Wild",
+        "Año": 2017,
+        "Consola": "Nintendo Switch"
+    },
+    {
+        "Titulo": "God of War",
+        "Año": 2018,
+        "Consola": "PlayStation 4"
+    },
+    {
+        "Titulo": "Halo Infinite",
+        "Año": 2021,
+        "Consola": "Xbox Series X"
+    }
+]
