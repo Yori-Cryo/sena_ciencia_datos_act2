@@ -17,13 +17,7 @@ st.subheader("Tu resultado:")
 # ESTUDIANTE: Escribe tu código a continuación
 try:
     df_json = pd.read_json("catalogo_juegos.json")
-
-
+    st.dataframe(df_json)
 except FileNotFoundError:
     st.error("El archivo 'catalogo_juegos.json' no existe en la carpeta del proyecto.")
-except ValueError:
-    st.error("El archivo JSON tiene un formato incorrecto.")
-except Exception as e:
-    st.error(f"Ocurrió un error al leer el archivo: {e}")
 
-st.dataframe(df_json)
